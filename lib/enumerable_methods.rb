@@ -1,4 +1,3 @@
-my_proc = Proc.new { |x| x + 1 }
 module Enumerable
    def my_each
      for i in self
