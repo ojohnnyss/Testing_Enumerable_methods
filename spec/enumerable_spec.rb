@@ -8,24 +8,22 @@ RSpec.describe Enumerable do
     
   describe "#my_each" do
     it "return an array itself" do
-	  expect(array1.my_each{|x| x}).to eql(array1)
-	end
+      expect(array1.my_each{|x| x}).to eql(array1)
+    end
 	
-	it "return in upcase" do
-	  expect(array3.my_each{|x| x}).to eq(['Kyiv', 'London', 'Los-Angeles'])
-	end
-		  	
+    it "return array3 in upcase" do
+      expect(array3.my_each{|x| x}).to eq(['Kyiv', 'London', 'Los-Angeles'])
+    end
   end
   
-  
   describe "#my_each_with_index" do
-    it "return array's index" do
-	  index = []
-	  array3.my_each_with_index{|x,i| index << i}
-	  expect(index).to eql([0, 1, 2])
-	end
+    it "return array's index for array3" do
+      index = []
+      array3.my_each_with_index{|x,i| index << i}
+      expect(index).to eql([0, 1, 2])
+    end
 	
-	it "return array's index" do
+    it "return array's index for array2" do
       index = []
       array2.my_each_with_index{|val, i| index << i}
       expect(index).to eql([0,1,2,3,4])
@@ -34,22 +32,21 @@ RSpec.describe Enumerable do
   end
   
   describe "#my_select" do
-    
     it "return even number from an array" do
-	    b = array2.my_select{|x| x % 2 == 0}
+      b = array2.my_select{|x| x % 2 == 0}
       expect(b).to eq([72, 94])
     end
 
     it "return numbers bigger than 80" do
-	  b = array2.my_select{|x| x > 80}
+      b = array2.my_select{|x| x > 80}
       expect(b).to eql([83, 94, 105])
     end
 
     it "get empty array if empty block given" do
-	     expect(array1.my_select{}).to eql([])
+      expect(array1.my_select{}).to eql([])
     end
 	
-	it "return numbers in upcase" do
+	it "return array3's numbers in upcase" do
 	  c = []
 	  array3.my_select{|x| c << x.upcase}
       expect(c).to eql(["KYIV", "LONDON", "LOS-ANGELES"])
@@ -58,7 +55,7 @@ RSpec.describe Enumerable do
   end
   
   describe "#my_all?" do
-    it "return true if they are all postive" do
+    it "return true if all array1's number are all postive" do
       expect(array1.my_all?{|x| x > 0}).to be true
     end
 
@@ -76,12 +73,11 @@ RSpec.describe Enumerable do
   end
 
   describe "#my_none?" do
-
     it "return true if none of them are smaller then zero" do
       expect(array1.my_none?{|x| x < 0}).to be true
     end
 	
-	it "return true if array have no 'Paris'" do
+    it "return true if array has no string 'Paris'" do
       expect(array3.my_none?{|x| x = "Paris"}).to be true
     end
        	
